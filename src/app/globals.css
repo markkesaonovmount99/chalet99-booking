@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-ink: #14201a;
+  --color-forest-950: #0e1912;
+  --color-forest-900: #16281f;
+  --color-forest-800: #1f3a2c;
+  --color-forest-700: #2c5039;
+  --color-forest-600: #3b6b4c;
+  --color-forest-100: #dde8de;
+  --color-forest-50: #eef3ee;
+
+  --color-wood-900: #4a3324;
+  --color-wood-700: #7a5738;
+  --color-wood-500: #a9825a;
+  --color-wood-300: #cba876;
+  --color-wood-100: #ecdfc9;
+
+  --color-cream: #faf8f3;
+  --color-paper: #ffffff;
+
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-ink: var(--color-ink);
+
+  --color-forest-950: var(--color-forest-950);
+  --color-forest-900: var(--color-forest-900);
+  --color-forest-800: var(--color-forest-800);
+  --color-forest-700: var(--color-forest-700);
+  --color-forest-600: var(--color-forest-600);
+  --color-forest-100: var(--color-forest-100);
+  --color-forest-50: var(--color-forest-50);
+
+  --color-wood-900: var(--color-wood-900);
+  --color-wood-700: var(--color-wood-700);
+  --color-wood-500: var(--color-wood-500);
+  --color-wood-300: var(--color-wood-300);
+  --color-wood-100: var(--color-wood-100);
+
+  --color-cream: var(--color-cream);
+  --color-paper: var(--color-paper);
+
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+
+  --container-8xl: 88rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* subtle chessboard texture, used sparingly as a decorative accent */
+.chess-texture {
+  background-image: repeating-conic-gradient(
+    var(--color-forest-800) 0% 25%,
+    transparent 0% 50%
+  );
+  background-size: 32px 32px;
+}
+
+.wood-divider {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-wood-500),
+    transparent
+  );
 }

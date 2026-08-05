@@ -7,7 +7,22 @@
       "Bash(python3 -c ' *)",
       "Bash(curl -sIL https://nodejs.org/dist/v24.19.0/node-v24.19.0.pkg)",
       "Bash(curl -sL -o /private/tmp/claude-501/-Users-kannakesaonova-Desktop-projectmount/e0614aa5-0bba-4e85-9246-085a5168f33c/scratchpad/node-v24.19.0.pkg https://nodejs.org/dist/v24.19.0/node-v24.19.0.pkg)",
-      "Bash(sudo installer -pkg /private/tmp/claude-501/-Users-kannakesaonova-Desktop-projectmount/e0614aa5-0bba-4e85-9246-085a5168f33c/scratchpad/node-v24.19.0.pkg -target /)"
+      "Bash(sudo installer -pkg /private/tmp/claude-501/-Users-kannakesaonova-Desktop-projectmount/e0614aa5-0bba-4e85-9246-085a5168f33c/scratchpad/node-v24.19.0.pkg -target /)",
+      "Bash(docker info *)",
+      "Bash(curl -s -o /tmp/chalets.html -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/chalets)",
+      "Read(//private/tmp/**)",
+      "Bash(mkdir -p /Users/kannakesaonova/Desktop/projectmount/src/app/api/chalets/\\\\[slug\\\\]/availability)",
+      "Bash(mkdir -p /Users/kannakesaonova/Desktop/projectmount/src/app/api/bookings/\\\\[id\\\\])",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/react-day-picker/package.json'\\).version\\)\")",
+      "Bash(node -e \"console.log\\(require\\('./node_modules/date-fns/package.json'\\).version\\)\")",
+      "Bash(curl -s -o /dev/null -w \"admin \\(no cookie\\): HTTP %{http_code} -> %{redirect_url}\\\\n\" http://localhost:3000/admin)",
+      "Bash(curl -s -i http://localhost:3000/admin)",
+      "Bash(rm -f /tmp/chalet99_cookies.txt)",
+      "Bash(curl -s -c /tmp/chalet99_cookies.txt -o /dev/null -w 'login: HTTP %{http_code} -> %{redirect_url}\\\\n' -X POST http://localhost:3000/admin/login -d password=chalet99admin)",
+      "Read(//tmp/**)",
+      "Bash(curl -s -b /tmp/chalet99_cookies.txt -o /tmp/admin.html -w 'admin \\(with cookie\\): HTTP %{http_code}\\\\n' http://localhost:3000/admin)",
+      "Bash(git check-ignore *)",
+      "Bash(git add *)"
     ]
   }
 }
