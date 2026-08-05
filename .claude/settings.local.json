@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(ls /usr/local/bin 2>&1 | head -50; echo \"---applications---\"; ls /Applications | grep -i node 2>&1; echo \"---volumes---\"; find / -maxdepth 3 -iname \"node\" -type f 2>/dev/null)",
+      "Bash(curl -s https://nodejs.org/dist/index.json)",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -sIL https://nodejs.org/dist/v24.19.0/node-v24.19.0.pkg)",
+      "Bash(curl -sL -o /private/tmp/claude-501/-Users-kannakesaonova-Desktop-projectmount/e0614aa5-0bba-4e85-9246-085a5168f33c/scratchpad/node-v24.19.0.pkg https://nodejs.org/dist/v24.19.0/node-v24.19.0.pkg)",
+      "Bash(sudo installer -pkg /private/tmp/claude-501/-Users-kannakesaonova-Desktop-projectmount/e0614aa5-0bba-4e85-9246-085a5168f33c/scratchpad/node-v24.19.0.pkg -target /)"
+    ]
+  }
+}
