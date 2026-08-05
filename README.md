@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Шале 99
 
-## Getting Started
+Сайт бронирования люксовых шале в горах Северной Осетии. Каталог с фильтрами, страница объекта с календарём доступности и формой бронирования, приём заявок в БД и простая админ-панель для их подтверждения.
 
-First, run the development server:
+## Стек
+
+- [Next.js 16](https://nextjs.org) (App Router, TypeScript, `src/`)
+- [Tailwind CSS 4](https://tailwindcss.com)
+- [Prisma 7](https://www.prisma.io) + PostgreSQL
+- [Zod](https://zod.dev) + [react-hook-form](https://react-hook-form.com) для валидации форм
+- [date-fns](https://date-fns.org) — собственный календарь доступности без сторонних UI-библиотек
+
+Подробности по конвенциям стека (в том числе особенности Next.js 16 / Prisma 7, отличающиеся от более старых версий) — в [CLAUDE.md](./CLAUDE.md).
+
+## Быстрый старт
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env        # заполнить DATABASE_URL и ADMIN_PASSWORD
+
+npm run db:dev               # локальный Postgres без Docker (npx prisma dev)
+npm run db:migrate           # применить миграции
+npm run db:seed              # засеять тестовые шале
+
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Если своего PostgreSQL нет — `npm run db:dev` поднимет локальный сервер и распечатает готовый `DATABASE_URL`, который нужно скопировать в `.env`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Переменные окружения
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Переменная            | Назначение                                              |
+| ---------------------- | -------------------------------------------------------- |
+| `DATABASE_URL`         | строка подключения к PostgreSQL                          |
+| `ADMIN_PASSWORD`       | пароль для входа в `/admin`                               |
+| `NEXT_PUBLIC_SITE_URL` | публичный URL сайта (используется в метатегах и sitemap)  |
 
-## Learn More
+## Скрипты
 
-To learn more about Next.js, take a look at the following resources:
+| Команда              | Что делает                                              |
+| --------------------- | ---------------------------------------------------------- |
+| `npm run dev`         | dev-сервер                                                 |
+| `npm run build`       | `prisma generate` → `prisma migrate deploy` → `next build` |
+| `npm run start`       | продакшн-сервер (после `build`)                            |
+| `npm run db:dev`      | локальный Postgres без Docker                              |
+| `npm run db:migrate`  | создать и применить миграцию в dev-БД                      |
+| `npm run db:seed`     | засеять тестовые шале                                      |
+| `npm run db:studio`   | Prisma Studio — просмотр БД в браузере                     |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Структура
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+prisma/            # schema.prisma, миграции, seed-скрипт
+src/
+  app/              # страницы App Router + API-роуты
+  components/       # ui/, layout/, home/, chalets/, contacts/
+  lib/              # prisma, zod-схемы, проверка доступности дат, auth
+  proxy.ts          # защита /admin (замена middleware.ts в Next.js 16)
+```
 
-## Deploy on Vercel
+## Данные
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Chalet** — название, локация, цена за ночь, вместимость, удобства, фото, `slug` для человекочитаемого URL.
+- **Booking** — заявка на бронирование шале со статусом `NEW` → `CONFIRMED` / `REJECTED`. Доступность дат проверяется по пересечению интервалов среди активных броней.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Админ-панель
+
+`/admin` защищена паролем из `ADMIN_PASSWORD` (без полноценной auth-системы — этого достаточно для одного администратора на первом этапе). Подтверждение и отклонение заявок — через Server Actions, без клиентского JS.
