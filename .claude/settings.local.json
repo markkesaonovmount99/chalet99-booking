@@ -30,7 +30,10 @@
       "Bash(curl -s -o /dev/null -w \"home: HTTP %{http_code}\\\\n\" http://localhost:3000/)",
       "Bash(kill 18473)",
       "Bash(jobs -l)",
-      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" --max-time 2 http://localhost:3000/)"
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" --max-time 2 http://localhost:3000/)",
+      "Bash(curl -sL -o /private/tmp/claude-501/-Users-kannakesaonova-Desktop-projectmount/e0614aa5-0bba-4e85-9246-085a5168f33c/scratchpad/gh.zip https://github.com/cli/cli/releases/download/v2.97.0/gh_2.97.0_macOS_arm64.zip)",
+      "Bash(mkdir -p /Users/kannakesaonova/.local/gh)",
+      "Bash(unzip -q -o /private/tmp/claude-501/-Users-kannakesaonova-Desktop-projectmount/e0614aa5-0bba-4e85-9246-085a5168f33c/scratchpad/gh.zip -d /private/tmp/claude-501/-Users-kannakesaonova-Desktop-projectmount/e0614aa5-0bba-4e85-9246-085a5168f33c/scratchpad/gh_extract)"
     ]
   }
 }
