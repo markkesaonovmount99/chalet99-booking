@@ -3,6 +3,8 @@ import { Hero } from "@/components/home/Hero";
 import { Advantages } from "@/components/home/Advantages";
 import { FeaturedChalets } from "@/components/home/FeaturedChalets";
 
+export const revalidate = 60;
+
 async function getFeaturedChalets() {
   const featured = await prisma.chalet.findMany({
     where: { featured: true },

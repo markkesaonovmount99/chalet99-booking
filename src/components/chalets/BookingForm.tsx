@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { differenceInCalendarDays } from "date-fns";
 import { CheckCircle2 } from "lucide-react";
-import { bookingSchema, type BookingInput } from "@/lib/validations";
+import { bookingSchema, type BookingFormInput, type BookingInput } from "@/lib/validations";
 import { formatDate, formatPrice } from "@/lib/utils";
 import { Input, Label, Textarea, FieldError } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
@@ -35,7 +35,7 @@ export function BookingForm({
     watch,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm<BookingInput>({
+  } = useForm<BookingFormInput, unknown, BookingInput>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
       chaletId,

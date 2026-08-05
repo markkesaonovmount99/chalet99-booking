@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import { Input, Label } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
 import { loginAction } from "@/app/admin/actions";
+
+export const metadata: Metadata = {
+  title: "Вход в админ-панель",
+  robots: { index: false, follow: false },
+};
 
 export default async function AdminLoginPage({
   searchParams,

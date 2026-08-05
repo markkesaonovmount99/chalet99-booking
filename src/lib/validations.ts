@@ -25,7 +25,8 @@ export const bookingSchema = z
     { message: "Дата заезда не может быть в прошлом", path: ["checkIn"] },
   );
 
-export type BookingInput = z.infer<typeof bookingSchema>;
+export type BookingInput = z.output<typeof bookingSchema>;
+export type BookingFormInput = z.input<typeof bookingSchema>;
 
 export const contactSchema = z.object({
   name: z.string().trim().min(2, "Введите имя"),
