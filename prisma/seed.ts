@@ -4,157 +4,70 @@ import { PrismaClient } from "../src/generated/prisma/client";
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
-function images(seed: string, count: number) {
+function localImages(dir: string, count: number) {
   return Array.from(
     { length: count },
-    (_, i) => `https://picsum.photos/seed/chalet99-${seed}-${i}/1600/1000`,
+    (_, i) => `/images/chalets/${dir}/${String(i + 1).padStart(2, "0")}.jpg`,
   );
 }
 
+// Реальные данные по состоянию на 09.09.2026. Координаты и часть удобств —
+// провизорные, уточняются у владельца (см. переписку по ТЗ на описания).
 const chalets = [
   {
-    slug: "vershina-fiagdon",
-    title: "Вершина Фиагдон",
+    slug: "maloe-shale",
+    title: "Малое шале",
     description:
-      "Шале на склоне Куртатинского ущелья с панорамой на Фиагдонскую долину. Дерево, тёмно-зелёный камень и тишина — как в партии, разыгранной без спешки. Внутри — камин, библиотека и коллекционный шахматный стол ручной работы.",
+      "Компактное шале на 60 м² в Куртатинском ущелье — одноэтажный дом с одной спальней и общей кухней-гостиной. Панорамные окна выходят на хребет, на террасе — лаунж-зона среди сосен. До ближайшего ресторана — около 1,9 км.",
     location: "Куртатинское ущелье, Северная Осетия",
     latitude: 42.7423,
     longitude: 44.2438,
-    pricePerNight: 18000,
-    bedrooms: 3,
-    maxGuests: 6,
-    amenities: [
-      "Wi-Fi",
-      "Камин",
-      "Сауна",
-      "Панорамные окна",
-      "Парковка",
-      "Мангальная зона",
-      "Вид на горы",
-      "Шахматный стол",
-    ],
-    images: images("fiagdon", 6),
-    featured: true,
-  },
-  {
-    slug: "bashnya-tsey",
-    title: "Башня Цей",
-    description:
-      "Каменное шале у подножия Цейского ледника, спроектированное как современное прочтение осетинской родовой башни. Минимализм в деталях, максимум — в виде из окна спальни.",
-    location: "Цейское ущелье, Северная Осетия",
-    latitude: 42.7911,
-    longitude: 43.9291,
-    pricePerNight: 22000,
-    bedrooms: 4,
-    maxGuests: 8,
-    amenities: [
-      "Wi-Fi",
-      "Камин",
-      "Джакузи",
-      "Тёплый пол",
-      "Парковка",
-      "Кухня",
-      "Терраса",
-      "Вид на ледник",
-    ],
-    images: images("tsey", 6),
-    featured: true,
-  },
-  {
-    slug: "digoria-lodge",
-    title: "Дигория Лодж",
-    description:
-      "Уединённое шале в Дигорском ущелье — для тех, кто ценит пространство и продуманную тишину. Библиотека с видом на хребет и коллекция шахматных наборов из разных эпох в гостиной.",
-    location: "Дигорское ущелье, Северная Осетия",
-    latitude: 42.9814,
-    longitude: 43.4967,
-    pricePerNight: 15500,
-    bedrooms: 2,
-    maxGuests: 4,
-    amenities: [
-      "Wi-Fi",
-      "Камин",
-      "Панорамные окна",
-      "Парковка",
-      "Мангальная зона",
-      "Библиотека",
-      "Шахматный стол",
-    ],
-    images: images("digoria", 5),
-    featured: true,
-  },
-  {
-    slug: "mamison-house",
-    title: "Мамисон Хаус",
-    description:
-      "Просторное шале рядом с курортом Мамисон — для больших компаний и семейных сборов. Общая гостиная с камином во всю стену, отдельная баня и терраса с видом на хребет.",
-    location: "Мамисонское ущелье, Северная Осетия",
-    latitude: 42.7328,
-    longitude: 43.9958,
-    pricePerNight: 26000,
-    bedrooms: 5,
-    maxGuests: 10,
-    amenities: [
-      "Wi-Fi",
-      "Камин",
-      "Баня",
-      "Парковка",
-      "Кухня",
-      "Мангальная зона",
-      "Терраса",
-      "Вид на горы",
-    ],
-    images: images("mamison", 6),
-    featured: false,
-  },
-  {
-    slug: "zaramag-nest",
-    title: "Зарамаг Нест",
-    description:
-      "Компактное шале для двоих на высоте — тихое место для тех, кто приезжает в горы за паузой, а не за суетой. Камин, чай на террасе и партия в шахматы под звёздами.",
-    location: "Зарамагская котловина, Северная Осетия",
-    latitude: 42.7047,
-    longitude: 44.0764,
-    pricePerNight: 12000,
+    pricePerNight: 17990,
     bedrooms: 1,
-    maxGuests: 2,
+    maxGuests: 3,
     amenities: [
       "Wi-Fi",
-      "Камин",
+      "Кухня",
       "Панорамные окна",
-      "Парковка",
       "Терраса",
-      "Шахматный стол",
+      "Вид на горы",
+      "Библиотека",
     ],
-    images: images("zaramag", 5),
-    featured: false,
+    images: localImages("maloe-shale", 12),
+    featured: true,
   },
   {
-    slug: "kurtatinskoe-gnezdo",
-    title: "Куртатинское Гнездо",
+    slug: "bolshoe-shale",
+    title: "Большое шале",
     description:
-      "Шале в глубине Куртатинского ущелья, рядом с древними склепами и сторожевыми башнями. Архитектура нарочито сдержанная: дерево, камень и много света.",
+      "Просторное шале на 120 м² по соседству с малым домом — одноэтажная планировка с двумя спальнями и отдельным большим залом для компании. Панорамное остекление, терраса с видом на хребет и библиотека в гостиной. До ближайшего ресторана — около 1,9 км.",
     location: "Куртатинское ущелье, Северная Осетия",
-    latitude: 42.7689,
-    longitude: 44.2115,
-    pricePerNight: 16500,
-    bedrooms: 3,
+    latitude: 42.7423,
+    longitude: 44.2438,
+    pricePerNight: 23900,
+    bedrooms: 2,
     maxGuests: 6,
     amenities: [
       "Wi-Fi",
-      "Камин",
-      "Сауна",
-      "Парковка",
       "Кухня",
-      "Мангальная зона",
+      "Панорамные окна",
+      "Терраса",
       "Вид на горы",
+      "Библиотека",
     ],
-    images: images("kurtatinskoe", 5),
-    featured: false,
+    images: localImages("bolshoe-shale", 13),
+    featured: true,
   },
 ];
 
+const KEEP_SLUGS = chalets.map((c) => c.slug);
+
 async function main() {
+  await prisma.booking.deleteMany({
+    where: { chalet: { slug: { notIn: KEEP_SLUGS } } },
+  });
+  await prisma.chalet.deleteMany({ where: { slug: { notIn: KEEP_SLUGS } } });
+
   for (const chalet of chalets) {
     await prisma.chalet.upsert({
       where: { slug: chalet.slug },

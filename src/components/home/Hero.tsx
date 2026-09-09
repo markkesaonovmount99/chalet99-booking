@@ -7,8 +7,8 @@ export function Hero() {
     <section className="relative overflow-hidden bg-forest-950 text-cream">
       <div className="absolute inset-0">
         <Image
-          src="https://picsum.photos/seed/chalet99-hero/2000/1200"
-          alt="Горы Северной Осетии на закате"
+          src="/images/site/hero.jpg"
+          alt="Горы Северной Осетии"
           fill
           preload
           sizes="100vw"
